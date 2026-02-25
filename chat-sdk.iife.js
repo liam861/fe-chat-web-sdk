@@ -81,5 +81,6 @@ var ChatSDK=(function(){"use strict";const m={init:(r={})=>{const{theme:s,positi
         z-index: 999;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         transition: all 0.2s;
+        padding: 0;
       `,t.onclick=()=>{const e=o.style.display==="block";o.style.display=e?"none":"block",e||o.contentWindow.postMessage({type:"TOGGLE",payload:{open:!0}},"*")},document.body.appendChild(t)}},toggle:()=>{const r=document.getElementById("chat-sdk-iframe"),s=document.getElementById("chat-sdk-toggle");if(r&&s){const a=r.style.display==="block";r.style.display=a?"none":"block"}}};window.ChatSDK=m;const i=document.currentScript;if(i){const r=i.getAttribute("data-theme")||"light",s=i.getAttribute("data-position")||"right",a=i.getAttribute("data-tenant-id"),u=i.getAttribute("data-iframe-src")||"https://dinhcunuocngoai.com.vn/fe/chat-sdk",b=i.getAttribute("data-primary-color"),l=i.getAttribute("data-brand-id"),h=i.getAttribute("data-side-spacing")||20,p=i.getAttribute("data-bottom-spacing")||20,g=i.getAttribute("data-logo")||"https://cdn.jsdelivr.net/gh/liam861/fe-chat-web-sdk@v0.0.3/chat-logo.svg";a&&l?m.init({theme:r,position:s,tenantId:a,iframeSrc:u,primaryColor:b,brandId:l,sideSpacing:h,bottomSpacing:p,logo:g}):console.warn("tenantId & brandId required")}return m})();
 //# sourceMappingURL=chat-sdk.iife.js.map
