@@ -1,8 +1,8 @@
-var ChatSDK=(function(){"use strict";const m={init:(r={})=>{const{theme:s,position:a,iframeSrc:u,tenantId:b,primaryColor:l,brandId:h,sideSpacing:p,bottomSpacing:g,logo:x}=r,f=t=>{const e={right:`bottom: ${g}px; right: ${p}px;`,left:`bottom: ${g}px; right: auto; left: ${p}px;`};return e[t]||e["bottom-right"]};let d=document.getElementById("chat-sdk-container");d||(d=document.createElement("div"),d.id="chat-sdk-container",document.body.appendChild(d));let o=document.getElementById("chat-sdk-iframe");o||(o=document.createElement("iframe"),o.id="chat-sdk-iframe",o.src=`${u}/`,o.style.cssText=`
+var ChatSDK=(function(){"use strict";const m={init:(r={})=>{const{theme:s,position:a,iframeSrc:u,tenantId:b,primaryColor:l,brandId:h,sideSpacing:p,bottomSpacing:g,logo:f}=r,y=t=>{const e={right:`bottom: ${g}px; right: ${p}px;`,left:`bottom: ${g}px; right: auto; left: ${p}px;`};return e[t]||e["bottom-right"]};let d=document.getElementById("chat-sdk-container");d||(d=document.createElement("div"),d.id="chat-sdk-container",document.body.appendChild(d));let o=document.getElementById("chat-sdk-iframe");o||(o=document.createElement("iframe"),o.id="chat-sdk-iframe",o.src=`${u}/`,o.style.cssText=`
         border: none;
         width: 360px; height: 620px; max-width: calc(100vw - 32px); max-height: 100dvh;
         position: fixed;
-        ${f(a)}
+        ${y(a)}
         z-index: 9999;
         display: none;
         border-radius: 16px;
@@ -67,9 +67,9 @@ var ChatSDK=(function(){"use strict";const m={init:(r={})=>{const{theme:s,positi
           <img src="${t}" alt="preview" />
           <button class="close-btn" aria-label="Close preview">&times;</button>
         </div>
-      `;const c=()=>{n&&n.parentNode&&n.parentNode.removeChild(n),n=null};e.querySelector(".overlay").addEventListener("click",y=>{y.target===y.currentTarget&&c()}),e.querySelector(".close-btn").addEventListener("click",c),document.body.appendChild(n)},k=t=>{if(t.source!==o.contentWindow)return;const{type:e,payload:c}=t.data;e==="IFRAME_READY"?o.contentWindow.postMessage({type:"INIT_PROPS",payload:{theme:s,position:a,tenantId:b,primaryColor:l,brandId:h}},"*"):e==="CHAT_MINIMIZE"?o.style.display="none":e==="IMAGE_PREVIEW_OPEN"&&c?.imageUrl&&w(c.imageUrl)};if(window.addEventListener("message",k),!document.getElementById("chat-sdk-toggle")){const t=document.createElement("button");t.id="chat-sdk-toggle",t.innerHTML=`<img src="${x}" alt="Chat" style="width:54px;height:54px;object-fit:cover;border-radius:50%;display:block;">`,t.setAttribute("aria-label","Open chat"),t.style.cssText=`
+      `;const c=()=>{n&&n.parentNode&&n.parentNode.removeChild(n),n=null};e.querySelector(".overlay").addEventListener("click",x=>{x.target===x.currentTarget&&c()}),e.querySelector(".close-btn").addEventListener("click",c),document.body.appendChild(n)},k=t=>{if(t.source!==o.contentWindow)return;const{type:e,payload:c}=t.data;e==="IFRAME_READY"?o.contentWindow.postMessage({type:"INIT_PROPS",payload:{theme:s,position:a,tenantId:b,primaryColor:l,brandId:h,logo:f}},"*"):e==="CHAT_MINIMIZE"?o.style.display="none":e==="IMAGE_PREVIEW_OPEN"&&c?.imageUrl&&w(c.imageUrl)};if(window.addEventListener("message",k),!document.getElementById("chat-sdk-toggle")){const t=document.createElement("button");t.id="chat-sdk-toggle",t.innerHTML=`<img src="${f}" alt="Chat" style="width:54px;height:54px;object-fit:cover;border-radius:50%;display:block;">`,t.setAttribute("aria-label","Open chat"),t.style.cssText=`
         position: fixed;
-        ${f(a)}
+        ${y(a)}
         background: #0C0E12; color: white;
         border: none; border-radius: 50%;
         width: 54px; height: 54px;
