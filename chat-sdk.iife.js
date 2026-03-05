@@ -1,4 +1,4 @@
-(function(){"use strict";(function(){let t=null,d=null,i=null,m="*",g=!1,c=[],s=null;const f=(e,o,a)=>{const r={right:`bottom:${a}px;right:${o}px;`,left:`bottom:${a}px;left:${o}px;`};return r[e]||r.right},b=e=>{!t?.contentWindow||!m||t.contentWindow.postMessage(e,m)},k=()=>{c.forEach(e=>e()),c=[]},h=()=>{t&&(t.style.display="block")},l=()=>{t&&(t.style.display="none")},v=e=>{if(s)return;s=document.createElement("div"),s.id="chat-sdk-image-preview";const o=s.attachShadow({mode:"closed"});o.innerHTML=`
+(function(){"use strict";(function(){let t=null,d=null,i=null,m="*",g=!1,c=[],s=null;const f=(e,o,a)=>{const r={right:`bottom:${a}px;right:${o}px;`,left:`bottom:${a}px;left:${o}px;`};return r[e]||r.right},b=e=>{!t?.contentWindow||!m||t.contentWindow.postMessage(e,m)},v=()=>{c.forEach(e=>e()),c=[]},h=()=>{t&&(t.style.display="block")},l=()=>{t&&(t.style.display="none")},E=e=>{if(s)return;s=document.createElement("div"),s.id="chat-sdk-image-preview";const o=s.attachShadow({mode:"closed"});o.innerHTML=`
       <style>
         :host {
           position: fixed;
@@ -58,7 +58,7 @@
         <img src="${e}" alt="preview" />
         <button class="close-btn" aria-label="Close preview">&times;</button>
       </div>
-    `;const a=()=>{s?.parentNode&&s.remove(),s=null};o.querySelector(".overlay").addEventListener("click",r=>{r.target===r.currentTarget&&a()}),o.querySelector(".close-btn").addEventListener("click",a),document.body.appendChild(s)},y={init:(e={})=>{const{theme:o,position:a,iframeSrc:r,tenantId:E,primaryColor:S,brandId:C,sideSpacing:x,bottomSpacing:I,logo:M,username:$}=e;d=document.getElementById("chat-sdk-container"),d||(d=document.createElement("div"),d.id="chat-sdk-container",document.body.appendChild(d)),t=document.getElementById("chat-sdk-iframe"),t||(t=document.createElement("iframe"),t.id="chat-sdk-iframe",t.src=`${r}/`,t.style.cssText=`
+    `;const a=()=>{s?.parentNode&&s.remove(),s=null};o.querySelector(".overlay").addEventListener("click",r=>{r.target===r.currentTarget&&a()}),o.querySelector(".close-btn").addEventListener("click",a),document.body.appendChild(s)},y={init:(e={})=>{const{theme:o,position:a,iframeSrc:r,tenantId:S,primaryColor:C,brandId:M,sideSpacing:x,bottomSpacing:I,logo:w,username:$}=e;d=document.getElementById("chat-sdk-container"),d||(d=document.createElement("div"),d.id="chat-sdk-container",document.body.appendChild(d)),t=document.getElementById("chat-sdk-iframe"),t||(t=document.createElement("iframe"),t.id="chat-sdk-iframe",t.src=`${r}/`,t.style.cssText=`
           border: none;
           width: 360px; height: 620px; max-width: calc(100vw - 32px); max-height: 100dvh;
           position: fixed;
@@ -67,7 +67,7 @@
           display: none;
           border-radius: 16px;
           box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        `,d.appendChild(t));const N=p=>{if(p.source!==t.contentWindow)return;const{type:u,payload:w}=p.data;u==="IFRAME_READY"&&(g=!0,b({type:"INIT_PROPS",payload:{theme:o,position:a,tenantId:E,primaryColor:S,brandId:C,username:$}}),k()),u==="CHAT_MINIMIZE"&&l(),u==="IMAGE_PREVIEW_OPEN"&&w?.imageUrl&&v(w.imageUrl)};window.addEventListener("message",N),i=document.getElementById("chat-sdk-toggle"),i||(i=document.createElement("button"),i.id="chat-sdk-toggle",i.innerHTML=`<img src="${M}" alt="Chat" style="width:54px;height:54px;object-fit:cover;border-radius:50%;display:block;">`,i.setAttribute("aria-label","Open chat"),i.style.cssText=`
+        `,d.appendChild(t));const N=p=>{if(p.source!==t.contentWindow)return;const{type:u,payload:k}=p.data;u==="IFRAME_READY"&&(g=!0,b({type:"INIT_PROPS",payload:{theme:o,position:a,tenantId:S,primaryColor:C,brandId:M,username:$,logo:w}}),v()),u==="CHAT_MINIMIZE"&&l(),u==="IMAGE_PREVIEW_OPEN"&&k?.imageUrl&&E(k.imageUrl)};window.addEventListener("message",N),i=document.getElementById("chat-sdk-toggle"),i||(i=document.createElement("button"),i.id="chat-sdk-toggle",i.innerHTML=`<img src="${w}" alt="Chat" style="width:54px;height:54px;object-fit:cover;border-radius:50%;display:block;">`,i.setAttribute("aria-label","Open chat"),i.style.cssText=`
           position: fixed;
       ${f(a,x,I)}
           background: #0C0E12; color: white;
