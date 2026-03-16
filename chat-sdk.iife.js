@@ -1,4 +1,4 @@
-(function(){"use strict";(function(){let t=null,d=null,i=null,m="*",g=!1,c=[],s=null;const f=(e,o,a)=>{const r={right:`bottom:${a}px;right:${o}px;`,left:`bottom:${a}px;left:${o}px;`};return r[e]||r.right},b=e=>{!t?.contentWindow||!m||t.contentWindow.postMessage(e,m)},v=()=>{c.forEach(e=>e()),c=[]},h=()=>{t&&(t.style.display="block")},l=()=>{t&&(t.style.display="none")},E=e=>{if(s)return;s=document.createElement("div"),s.id="chat-sdk-image-preview";const o=s.attachShadow({mode:"closed"});o.innerHTML=`
+(function(){"use strict";(function(){let t=null,d=null,n=null,y="*",x=!1,u=[],r=null;const j=async({url:e,brandId:o,tenantId:i})=>{const s=await fetch(`${e}/public/v1/brands/${o}`,{method:"GET",headers:{"x-tenant-id":i}});if(!s.ok)throw new Error(`Failed to fetch brand config: ${s.status}`);return s.json()},B=(e,o=0,i=0)=>{const s={right:`bottom:${i}px;right:${o}px;`,left:`bottom:${i}px;left:${o}px;`};return s[e]||s.right},w=e=>{!t?.contentWindow||!y||t.contentWindow.postMessage(e,y)},_=()=>{u.forEach(e=>e()),u=[]},v=()=>{t&&(t.style.display="block")},m=()=>{t&&(t.style.display="none")},A=e=>{if(r)return;r=document.createElement("div"),r.id="chat-sdk-image-preview";const o=r.attachShadow({mode:"closed"});o.innerHTML=`
       <style>
         :host {
           position: fixed;
@@ -58,18 +58,42 @@
         <img src="${e}" alt="preview" />
         <button class="close-btn" aria-label="Close preview">&times;</button>
       </div>
-    `;const a=()=>{s?.parentNode&&s.remove(),s=null};o.querySelector(".overlay").addEventListener("click",r=>{r.target===r.currentTarget&&a()}),o.querySelector(".close-btn").addEventListener("click",a),document.body.appendChild(s)},y={init:(e={})=>{const{theme:o,position:a,iframeSrc:r,tenantId:S,primaryColor:C,brandId:M,sideSpacing:x,bottomSpacing:I,logo:w,username:$}=e;d=document.getElementById("chat-sdk-container"),d||(d=document.createElement("div"),d.id="chat-sdk-container",document.body.appendChild(d)),t=document.getElementById("chat-sdk-iframe"),t||(t=document.createElement("iframe"),t.id="chat-sdk-iframe",t.src=`${r}/`,t.style.cssText=`
+    `;const i=()=>{r?.parentNode&&r.remove(),r=null};o.querySelector(".overlay").addEventListener("click",s=>{s.target===s.currentTarget&&i()}),o.querySelector(".close-btn").addEventListener("click",i),document.body.appendChild(r)},I={init:async(e={})=>{const{theme:o,position:i,iframeSrc:s,tenantId:S,primaryColor:k,brandId:E,sideSpacing:C,bottomSpacing:$,logo:D,customerName:L}=e;let h=D,N=k,P=C,T=$,l=i||"right";d=document.getElementById("chat-sdk-container"),d||(d=document.createElement("div"),d.id="chat-sdk-container",document.body.appendChild(d)),t=document.getElementById("chat-sdk-iframe"),t||(t=document.createElement("iframe"),t.id="chat-sdk-iframe",t.src=`${s}/`,t.style.cssText=`
           border: none;
           width: 360px; height: 620px; max-width: calc(100vw - 32px); max-height: 100dvh;
           position: fixed;
-         ${f(a,x,I)}
           z-index: 9999;
           display: none;
           border-radius: 16px;
           box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        `,d.appendChild(t));const N=p=>{if(p.source!==t.contentWindow)return;const{type:u,payload:k}=p.data;u==="IFRAME_READY"&&(g=!0,b({type:"INIT_PROPS",payload:{theme:o,position:a,tenantId:S,primaryColor:C,brandId:M,username:$,logo:w}}),v()),u==="CHAT_MINIMIZE"&&l(),u==="IMAGE_PREVIEW_OPEN"&&k?.imageUrl&&E(k.imageUrl)};window.addEventListener("message",N),i=document.getElementById("chat-sdk-toggle"),i||(i=document.createElement("button"),i.id="chat-sdk-toggle",i.innerHTML=`<img src="${w}" alt="Chat" style="width:54px;height:54px;object-fit:cover;border-radius:50%;display:block;">`,i.setAttribute("aria-label","Open chat"),i.style.cssText=`
+        `,d.appendChild(t));const R=async b=>{if(b.source!==t.contentWindow)return;const{type:f,payload:p}=b.data;if(f==="IFRAME_READY"){try{const g=`${p.apiPath}/asset/public/v1/files?key=`,M=await j({url:p.apiPath,brandId:E,tenantId:S}),c=M?.data?.widget||{};h=c?.logo?`${g}${c.logo}`:`${g}${M?.data?.logo}`,N=c?.primaryColor??k,T=c?.bottomSpacing??$,P=c?.sideSpacing??C,l=c?.position||l}catch(g){console.warn("[ChatSDK] Could not fetch brand config, using defaults.",g)}const z=B(l,P,T);n.querySelector("img").src=h,n.style.cssText=`
+            position: fixed;
+            ${z}
+            background: #0C0E12; color: white;
+            border: none; border-radius: 50%;
+            width: 54px; height: 54px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.2s;
+            padding: 0;
+            visibility: visible;
+          `,t.style.cssText=`
+            border: none;
+            width: 360px; height: 620px; max-width: calc(100vw - 32px); max-height: 100dvh;
+            position: fixed;
+            ${z}
+            z-index: 9999;
+            display: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+          `,x=!0,w({type:"INIT_PROPS",payload:{theme:o,position:l,tenantId:S,primaryColor:N,brandId:E,customerName:L,logo:h}}),_()}f==="CHAT_MINIMIZE"&&m(),f==="IMAGE_PREVIEW_OPEN"&&p?.imageUrl&&A(p.imageUrl)};window.addEventListener("message",R),n=document.getElementById("chat-sdk-toggle"),n||(n=document.createElement("button"),n.id="chat-sdk-toggle",n.innerHTML='<img src="" alt="Chat" style="width:54px;height:54px;object-fit:cover;border-radius:50%;display:block;">',n.setAttribute("aria-label","Open chat"),n.style.cssText=`
           position: fixed;
-      ${f(a,x,I)}
+          visibility: hidden;
           background: #0C0E12; color: white;
           border: none; border-radius: 50%;
           width: 54px; height: 54px;
@@ -82,5 +106,5 @@
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
           transition: all 0.2s;
           padding: 0;
-        `,i.onclick=()=>{t.style.display==="block"?l():h()},document.body.appendChild(i))},toggle:()=>{const e=document.getElementById("chat-sdk-toggle");(t||e)&&(t.style.display==="block"?l():h())},changeUserInfo:e=>{const o=()=>{b({type:"CHANGE_USER_INFO",payload:{user:e}})};g?o():c.push(o)}};globalThis.ChatSDK=y;const n=document.currentScript;if(n){const e={theme:n.dataset.theme,position:n.dataset.position,tenantId:n.dataset.tenantId,iframeSrc:n.dataset.iframeSrc,primaryColor:n.dataset.primaryColor,brandId:n.dataset.brandId,sideSpacing:Number(n.dataset.sideSpacing)||20,bottomSpacing:Number(n.dataset.bottomSpacing)||20,username:n.dataset.username,logo:n.dataset.logo};e.tenantId&&e.brandId&&e.iframeSrc&&y.init(e)}})()})();
+        `,n.onclick=()=>{t.style.display==="block"?m():v()},document.body.appendChild(n))},toggle:()=>{const e=document.getElementById("chat-sdk-toggle");(t||e)&&(t.style.display==="block"?m():v())},changeUserInfo:({customerName:e,customerId:o})=>{const i=()=>{w({type:"CHANGE_USER_INFO",payload:{user:{customerName:e,customerId:o}}})};x?i():u.push(i)}};globalThis.ChatSDK=I;const a=document.currentScript;if(a){const e={theme:a.dataset.theme,position:a.dataset.position,tenantId:a.dataset.tenantId,iframeSrc:a.dataset.iframeSrc,primaryColor:a.dataset.primaryColor,brandId:a.dataset.brandId,sideSpacing:Number(a.dataset.sideSpacing)||20,bottomSpacing:Number(a.dataset.bottomSpacing)||20,customerName:a.dataset.customerName,logo:a.dataset.logo};e.tenantId&&e.brandId&&e.iframeSrc&&I.init(e)}})()})();
 //# sourceMappingURL=chat-sdk.iife.js.map
